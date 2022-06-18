@@ -13,6 +13,7 @@ export default function LotteryEntrance() {
     const [numPlayers, setNumPlayers] = useState("0")
     const [recentWinner, setRecentWinner] = useState("0")
     const [raffleState, setRaffleState] = useState("0")
+    const [raffleWordState, setRaffleWordState] = useState("0")
 
     const dispatch = useNotification()
 
@@ -66,7 +67,12 @@ export default function LotteryEntrance() {
         setNumPlayers(numPlayersFromCall)
         setRecentWinner(recentWinnerFromCall)
         setRaffleState(raffleStateFromCall)
-        console.log(`Raffle State: ${raffleState}`)
+        //console.log(`Raffle State: ${raffleState}`)
+        if (raffleState == "0") {
+            setRaffleWordState("OPEN")
+        } else {
+            setRaffleWordState("CALCULATING")
+        }
         console.log(`NumPlayers: ${numPlayers} recentWinner: ${recentWinner}`)
     }
 
@@ -119,7 +125,7 @@ export default function LotteryEntrance() {
                     <div>Entrance Fee: {ethers.utils.formatEther(entranceFee)} ETH</div>
                     <div>Players: {numPlayers} </div>
                     <div>Recent Winner: {recentWinner} </div>
-                    <div>Raffle State: {raffleState} </div>
+                    <div>Raffle State: {raffleWordState} </div>
                 </div>
             ) : (
                 <div>No Raffle Address Detected</div>
